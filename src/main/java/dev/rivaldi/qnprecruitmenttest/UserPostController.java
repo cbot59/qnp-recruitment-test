@@ -1,5 +1,6 @@
 package dev.rivaldi.qnprecruitmenttest;
 
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ class UserPostController {
 
     private final RestTemplate restTemplate;
 
+    @RateLimiter(name = "simpleRateLimit")
     @GetMapping("/calculate")
     Long get() {
         var start = Instant.now();
